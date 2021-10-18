@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Nested stack template(SNS) + passing params"
+
+Parameters:
+  Email:
+    Type: String
+    Description: 'ENTER email as SNS endpoint'
+Resources:
+  SNS-nested-stack:
+    Type: AWS::CloudFormation::Stack
+    Properties: 
+      Parameters:
+        SNSEmail: !Ref Email
+      TemplateURL: #url of s3 bucket with SNS resource
+      TimeoutInMinutes: 60
+Outputs:
+  MyStack:
+    Value: !Ref SNS-nested-stack
+  
